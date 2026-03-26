@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getModules } from "@/lib/content";
+import { getModules, getLessons } from "@/lib/content";
 import ModuleCard from "@/components/ModuleCard";
 import { GraduationCap, Zap, Rocket } from "lucide-react";
 
@@ -9,90 +9,62 @@ export default function HomePage() {
 
   return (
     <main className="flex-1">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-violet-50 via-white to-purple-50" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-violet-200/40 to-purple-300/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-gradient-to-tr from-blue-200/30 to-cyan-200/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/4" />
-
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-          <div className="text-center max-w-3xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-violet-100 text-primary rounded-full text-sm font-semibold mb-6">
-              <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              Free E-Learning Platform
-            </div>
-
-            <h1 className="text-4xl md:text-6xl font-extrabold text-foreground leading-tight tracking-tight">
-              Master{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">
-                AI Visual
-              </span>{" "}
-              Creation
-            </h1>
-            <p className="mt-6 text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-              From foundation to mastery — learn professional AI image creation,
-              prompt engineering, and creative direction with our comprehensive
-              studio suite course.
-            </p>
-
-            <div className="flex items-center justify-center gap-8 mt-10">
-              <div className="text-center">
-                <p className="text-3xl font-extrabold text-primary">{modules.length}</p>
-                <p className="text-sm text-gray-500 mt-1">Modules</p>
-              </div>
-              <div className="w-px h-12 bg-border" />
-              <div className="text-center">
-                <p className="text-3xl font-extrabold text-primary">{totalLessons}</p>
-                <p className="text-sm text-gray-500 mt-1">Lessons</p>
-              </div>
-              <div className="w-px h-12 bg-border" />
-              <div className="text-center">
-                <p className="text-3xl font-extrabold text-primary">Free</p>
-                <p className="text-sm text-gray-500 mt-1">Forever</p>
-              </div>
-            </div>
-
-            <div className="mt-10">
-              <Link
-                href="/modules"
-                className="inline-block px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold rounded-2xl hover:shadow-xl hover:shadow-violet-200 transition-all hover:-translate-y-0.5 text-lg"
-              >
-                Start Learning Now
-              </Link>
-            </div>
+      {/* Hero */}
+      <section className="border-b border-border">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-20">
+          <p className="text-xs font-bold text-primary uppercase tracking-widest mb-4">
+            Free E-Learning Platform
+          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-white leading-[1.05] tracking-tight max-w-xl uppercase" style={{ fontFamily: 'var(--font-heading), system-ui, sans-serif', letterSpacing: '-0.04em' }}>
+            Master AI Visual <span className="text-primary">Creation</span>
+          </h1>
+          <p className="mt-4 text-muted max-w-lg leading-relaxed text-sm">
+            From foundation to mastery — learn professional AI image creation,
+            prompt engineering, and creative direction.
+          </p>
+          <div className="flex items-center gap-6 mt-6 text-sm font-bold">
+            <span className="text-white">{modules.length} Modules</span>
+            <span className="text-border">|</span>
+            <span className="text-white">{totalLessons} Lessons</span>
+            <span className="text-border">|</span>
+            <span className="text-primary">Free</span>
           </div>
+          <Link
+            href="/modules"
+            className="inline-block mt-6 px-6 py-2.5 bg-primary text-black font-bold rounded-lg hover:bg-primary-dark transition-colors text-sm"
+          >
+            Start Learning
+          </Link>
         </div>
       </section>
 
-      {/* Modules Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold text-foreground">Course Modules</h2>
-          <p className="text-gray-500 mt-3 text-lg">Progress through our structured learning path</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {modules.map((module) => (
-            <ModuleCard key={module.slug} module={module} />
+      {/* Modules */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+        <h2 className="text-xl font-bold text-white mb-6 uppercase tracking-wide" style={{ fontFamily: 'var(--font-heading), system-ui, sans-serif' }}>Course Modules</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {modules.map((m) => (
+            <ModuleCard key={m.slug} module={m} lessons={getLessons(m.slug)} />
           ))}
         </div>
       </section>
 
       {/* Features */}
-      <section className="bg-gradient-to-b from-surface to-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="border-t border-border">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
             {[
-              { icon: <GraduationCap className="w-8 h-8" />, title: "Structured Learning", desc: "14 modules from foundation to mastery, each building on the previous." },
-              { icon: <Zap className="w-8 h-8" />, title: "Practical Skills", desc: "Real-world prompt templates, workflows, and professional techniques." },
-              { icon: <Rocket className="w-8 h-8" />, title: "Career Ready", desc: "Business strategies, freelancing guides, and monetization blueprints." },
-            ].map((feature) => (
-              <div key={feature.title} className="text-center p-8 bg-white rounded-2xl border border-border card-hover">
-                <div className="w-16 h-16 mx-auto rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white shadow-lg">
-                  {feature.icon}
+              { icon: <GraduationCap className="w-6 h-6" />, title: "Structured Learning", desc: "14 modules from foundation to mastery." },
+              { icon: <Zap className="w-6 h-6" />, title: "Practical Skills", desc: "Real-world templates and workflows." },
+              { icon: <Rocket className="w-6 h-6" />, title: "Career Ready", desc: "Freelancing and monetization guides." },
+            ].map((f) => (
+              <div key={f.title} className="flex items-start gap-4 p-5 rounded-lg bg-surface border border-border">
+                <div className="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  {f.icon}
                 </div>
-                <h3 className="text-lg font-bold mt-5">{feature.title}</h3>
-                <p className="text-gray-500 mt-2 text-sm leading-relaxed">{feature.desc}</p>
+                <div>
+                  <h3 className="text-[15px] font-bold text-white">{f.title}</h3>
+                  <p className="text-sm text-muted mt-0.5">{f.desc}</p>
+                </div>
               </div>
             ))}
           </div>

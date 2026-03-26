@@ -2,37 +2,19 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Lesson } from "@/lib/content";
 
-interface LessonNavProps {
-  prev: Lesson | null;
-  next: Lesson | null;
-}
-
-export default function LessonNav({ prev, next }: LessonNavProps) {
+export default function LessonNav({ prev, next }: { prev: Lesson | null; next: Lesson | null }) {
   return (
-    <div className="flex items-center justify-between gap-4 mt-10 pt-6 border-t border-border">
+    <div className="flex items-center justify-between gap-3 mt-8 pt-4 border-t border-gray-200">
       {prev ? (
-        <Link
-          href={`/modules/${prev.moduleSlug}/${prev.slug}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-surface hover:bg-surface-2 transition-colors group text-sm font-semibold text-foreground"
-        >
-          <ChevronLeft className="w-4 h-4 text-gray-400 group-hover:text-primary" />
-          Previous
+        <Link href={`/modules/${prev.moduleSlug}/${prev.slug}`} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg border border-gray-200 hover:border-gray-300 text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors">
+          <ChevronLeft className="w-4 h-4" /> Previous
         </Link>
-      ) : (
-        <div />
-      )}
-
+      ) : <div />}
       {next ? (
-        <Link
-          href={`/modules/${next.moduleSlug}/${next.slug}`}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-violet-500 to-purple-600 text-white hover:shadow-lg hover:shadow-violet-200 transition-all text-sm font-semibold"
-        >
-          Next Lesson
-          <ChevronRight className="w-4 h-4" />
+        <Link href={`/modules/${next.moduleSlug}/${next.slug}`} className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-bold hover:bg-black transition-colors">
+          Next Lesson <ChevronRight className="w-4 h-4" />
         </Link>
-      ) : (
-        <div />
-      )}
+      ) : <div />}
     </div>
   );
 }

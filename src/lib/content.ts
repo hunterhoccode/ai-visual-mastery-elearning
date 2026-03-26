@@ -159,23 +159,7 @@ export function getModuleIconName(number: number): string {
   return icons[number] || "BookOpen";
 }
 
-// Module color mapping for cards
-export function getModuleColor(number: number): string {
-  const colors: Record<number, string> = {
-    1: "from-violet-500 to-purple-600",
-    2: "from-blue-500 to-indigo-600",
-    3: "from-cyan-500 to-blue-600",
-    4: "from-pink-500 to-rose-600",
-    5: "from-orange-500 to-red-500",
-    6: "from-emerald-500 to-teal-600",
-    7: "from-amber-500 to-orange-600",
-    8: "from-indigo-500 to-violet-600",
-    9: "from-teal-500 to-cyan-600",
-    10: "from-purple-500 to-pink-600",
-    11: "from-green-500 to-emerald-600",
-    12: "from-red-500 to-pink-600",
-    13: "from-sky-500 to-blue-600",
-    14: "from-fuchsia-500 to-purple-600",
-  };
-  return colors[number] || "from-gray-500 to-gray-600";
+// Module color — unified blue
+export function getModuleColor(_number: number): string {
+  return "from-blue-600 to-blue-700";
 }

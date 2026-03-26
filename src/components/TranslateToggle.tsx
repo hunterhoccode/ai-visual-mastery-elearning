@@ -90,10 +90,10 @@ export default function TranslateToggle() {
     <button
       onClick={translateContent}
       disabled={isLoading}
-      className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all shrink-0 ${
+      className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all shrink-0 ${
         isVietnamese
-          ? "bg-primary text-white shadow-lg shadow-violet-200"
-          : "bg-white text-gray-600 border border-gray-200 hover:border-violet-300 hover:text-primary hover:shadow-md"
+          ? "bg-primary text-black"
+          : "text-muted border border-border hover:border-primary/30 hover:text-primary"
       } ${isLoading ? "opacity-70 cursor-wait" : "cursor-pointer"}`}
     >
       {isLoading ? (
